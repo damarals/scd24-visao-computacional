@@ -140,7 +140,7 @@ def setup_coco_person(output_dir="data/coco", samples_per_class=1000):
         data_path="train",
         labels_path="annotations/instances_train.json",
         categories=categories,
-        export_media=True
+        export_media="move"
     )
 
     val_exporter = fouc.COCODetectionDatasetExporter(
@@ -148,7 +148,7 @@ def setup_coco_person(output_dir="data/coco", samples_per_class=1000):
         data_path="val",
         labels_path="annotations/instances_val.json",
         categories=categories,
-        export_media=True
+        export_media="move"
     )
 
     # Export datasets
