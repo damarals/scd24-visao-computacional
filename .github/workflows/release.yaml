@@ -44,7 +44,7 @@ jobs:
         zip -r coco_dataset.zip coco/
         {
           echo "# COCO Dataset Release"
-          echo "This release contains the COCO dataset processed for person detection."
+          echo "This release contains the COCO dataset processed for person classification, detection and segmentation."
           echo ""
           echo "## Structure"
           echo "\`\`\`"
