@@ -1,0 +1,24 @@
+{
+	"name": "Paper Scrapper",
+	"build": {
+        "dockerfile": "Dockerfile"
+    },
+	"workspaceMount": "source=${localWorkspaceFolder},target=/home/scd/app,type=bind",
+	"workspaceFolder": "/home/scd/app",
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils:2": {},
+		"ghcr.io/stuartleeks/dev-container-features/shell-history:0": {},
+		"ghcr.io/nils-geistmann/devcontainers-features/zsh:0": {}
+	},
+	"remoteUser": "scd",
+	"containerUser": "scd",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"ms-toolsai.jupyter",
+				"tomoki1207.pdf"
+			]
+		}
+	}
+}
