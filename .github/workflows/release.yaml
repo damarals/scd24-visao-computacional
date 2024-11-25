@@ -35,7 +35,7 @@ jobs:
     - name: Get version info
       id: info
       run: |
-        echo "date=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
+        echo "date=$(date +'%d%m%Y')" >> $GITHUB_OUTPUT
         echo "version=$(poetry version -s)" >> $GITHUB_OUTPUT
         
     - name: Prepare release
@@ -61,7 +61,7 @@ jobs:
           poetry version
           echo "\`\`\`"
           echo ""
-          date +"## Release Date: %Y-%m-%d"
+          date +"## Release Date: %d-%m-%Y"
         } > RELEASE_NOTES.md
         
     - name: Create Release

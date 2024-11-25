@@ -26,7 +26,7 @@ def setup_coco_person(output_dir="data/coco", samples_per_class=1000):
     dataset = foz.load_zoo_dataset(
         "sama-coco",
         splits=["train", "validation"],
-        label_types=["detections", "segmentations"],
+        label_types=["segmentations"],
         max_samples=samples_per_class * 4  # Load extra samples to ensure we have enough after filtering
     )
 
@@ -40,17 +40,17 @@ def setup_coco_person(output_dir="data/coco", samples_per_class=1000):
         
         # Check if image has person in segmentations
         has_person = False
-        if hasattr(sample, 'segmentations') and sample.segmentations is not None:
-            has_person = any(det.label == "person" for det in sample.segmentations.detections)
+        if (hasattr(sample, 'ground_truth') and sample.ground_truth is not None):
+            has_person = any(det.label == "person" for det in sample.ground_truth.detections)
         
         # Process segmentations field
         if has_person:
             # Keep only person segmentations
-            person_detections = [
-                det for det in sample.segmentations.detections 
+            person_segmentations = [
+                det for det in sample.ground_truth.detections 
                 if det.label == "person"
             ]
-            new_sample['segmentations'] = fo.Detections(detections=person_detections)
+            new_sample['segmentations'] = fo.Detections(detections=person_segmentations)
         else:
             # Create a single "no-person" detection for the image
             h, w = sample.metadata.height, sample.metadata.width
@@ -63,28 +63,6 @@ def setup_coco_person(output_dir="data/coco", samples_per_class=1000):
                 iscrowd=0
             )
             new_sample['segmentations'] = fo.Detections(detections=[no_person_det])
-        
-        # Process detections field
-        if hasattr(sample, 'detections') and sample.detections is not None:
-            # Convert non-person detections to no-person
-            detections_list = []
-            has_person_detection = False
-            
-            for det in sample.detections.detections:
-                if det.label == "person":
-                    detections_list.append(det)
-                    has_person_detection = True
-            
-            if not has_person_detection:
-                # If no person detections found, add a single no-person detection
-                no_person_det = fo.Detection(
-                    label="no-person",
-                    bounding_box=[0, 0, 1, 1],
-                    iscrowd=0
-                )
-                detections_list = [no_person_det]
-            
-            new_sample['detections'] = fo.Detections(detections=detections_list)
         
         processed_dataset.add_sample(new_sample)
 
@@ -160,7 +138,7 @@ def setup_coco_person(output_dir="data/coco", samples_per_class=1000):
     print(f"Total validation images: {len(val_dataset)}")
     
     print("\nDataset statistics:")
-    train_labels = train_dataset.count_values("detections.detections.label")
-    val_labels = val_dataset.count_values("detections.detections.label")
+    train_labels = train_dataset.count_values("segmentations.detections.label")
+    val_labels = val_dataset.count_values("segmentations.detections.label")
     print("Training label distribution:", train_labels)
     print("Validation label distribution:", val_labels)
