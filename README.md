@@ -1,6 +1,6 @@
 # Ensinando Computadores a Verem: Uma Introdução à Visão Computacional
 
-[![Abrir no Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1FRIZKkunuEwkbljcKHrUOON1iUqjy-zw?usp=sharing)
+[![Abrir no Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/17v9Db4zsIeV4x3RZMk3LNSmKcBieraTp?usp=sharing)
 
 Este repositório contém os materiais da apresentação "Ensinando Computadores a Verem: Uma Introdução à Visão Computacional", ministrada durante a Semana Acadêmica da Ciência de Dados 2024 (SCD24) na Universidade Federal do Ceará.
 
@@ -19,6 +19,7 @@ Introduzir os conceitos fundamentais de Visão Computacional de forma prática e
   - Detecção de objetos
   - Segmentação semântica
   - Demonstrações em tempo real com webcam
+- `alpi.jpg`: Imagem de teste utilizada (meu dog 😎)
 
 ## 🛠️ Tecnologias Utilizadas
 
