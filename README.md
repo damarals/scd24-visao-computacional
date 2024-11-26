@@ -1,0 +1,1 @@
+# scd24-visao-computacional
